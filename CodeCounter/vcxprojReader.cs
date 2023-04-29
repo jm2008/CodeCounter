@@ -66,6 +66,23 @@ namespace CodeCounter
                     parent = parent.Trim();
                     filenames.Add(parent);
                 }
+                else if (item.Contains("Include Include=")) // get header files
+                {
+                    string file = item.Trim().Substring(item.Trim().IndexOf("Include=\"") + 9, item.Trim().Length - (item.Trim().IndexOf("Include=\"") + 9));
+
+                    // create full path to the source file
+                    string parent = Path.GetDirectoryName(filename) + "\\";
+                    parent += file;
+
+                    if (parent.Contains("/"))
+                        parent = parent.Remove(parent.IndexOf("/"), 1);
+                    if (parent.Contains("\""))
+                        parent = parent.Remove(parent.IndexOf("\""), 1);
+                    if (parent.Contains(">"))
+                        parent = parent.Remove(parent.IndexOf(">"), 1);
+                    parent = parent.Trim();
+                    filenames.Add(parent);
+                }
             }
 
             return filenames;
