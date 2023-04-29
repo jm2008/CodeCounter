@@ -1,0 +1,5 @@
+.vs
+CodeCounter/bin
+CodeCounter/obj
+/Output
+*.iss
